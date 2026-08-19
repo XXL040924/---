@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开平碉楼：五层悲歌</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #1a1614; }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .fallback {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);# 五层悲歌 - 部署指南
+
+## 当前状态
+- **游戏版本**: v10
+- **在线预览**: https://1xy9lx7viu.ai-app.pub
+- **应用ID**: b709133c-d957-48ac-a0b8-b201b80e9c1b
+
+## 问题说明
+该游戏由钉钉AI应用平台（ai-app.dingtalk.com）构建，采用Vite SPA架构，源代码托管在钉钉云端，无法直接导出完整构建产物。
+
+## 部署方案
+
+### 方案A：使用钉钉AI应用原生链接（推荐）
+直接使用现有预览链接作为游戏入口：
+```
+https://1xy9lx7viu.ai-app.pub
+```
+优点：无需额外部署，保持所有功能完整
+缺点：依赖钉钉AI应用平台
+
+### 方案B：手动导出并部署到GitHub Pages
+由于ai-app未提供源码导出功能，需要手动操作：
+
+1. **获取游戏源码**：
+   - 打开 https://1xy9lx7viu.ai-app.pub
+   - 按 `Ctrl+U` 查看页面源代码
+   - 记录 `/assets/index-*.js` 和 `/assets/index-*.css` 的完整URL
+   - 下载这些文件到本地
+
+2. **创建GitHub仓库结构**：
+   ```
+   repo/
+   ├── index.html
+   └── assets/
+       ├── index-0a80e1d9.js
+       └── index-35641085.css
+   ```
+
+3. **修改index.html中的资源路径**：
+   将绝对路径改为相对路径或GitHub Pages的base path
+
+4. **推送到GitHub**：
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit: 五层悲歌 v10"
+   git remote add origin https://github.com/XXL040924/---.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+5. **启用GitHub Pages**：
+   - 进入仓库 Settings → Pages
+   - Source 选择 `main` 分支，目录选 `/ (root)`
+   - 保存后等待部署完成
+
+### 方案C：联系钉钉AI应用团队获取源码导出权限
+如果需要使用自定义域名或完全独立部署，建议联系钉钉AI应用平台支持团队，申请源码导出功能。
+
+## 注意事项
+- 游戏使用了钉钉AI应用SDK (`app-sdk.js`)，脱离该平台可能部分功能不可用
+- 角色立绘等图片资源存储在钉钉媒体服务器，需确保跨域访问正常
+- 建议在部署前测试所有功能是否正常工作
+
+## 联系方式
+如有部署问题，请联系钉钉AI应用平台技术支持或查看官方文档。
+
+      color: #d4c8b8;
+      font-family: "Microsoft YaHei", sans-serif;
+      text-align: center;
+      z-index: -1;
+    }
+    .fallback h1 { font-size: 28px; margin-bottom: 15px; color: #e8dcc8; }
+    .fallback p { font-size: 16px; line-height: 1.8; }
+    .fallback a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background: #8b7355;
+      color: #f0e6d6;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+    .fallback a:hover { background: #a89880; }
+  </style>
+</head>
+<body>
+  <div class="fallback">
+    <h1>开平碉楼：五层悲歌</h1>
+    <p>游戏正在加载中...</p>
+    <p>如果长时间未显示，请点击下方按钮直接访问</p>
+    <a href="https://1xy9lx7viu.ai-app.pub" target="_blank">打开游戏</a>
+  </div>
+  <iframe
+    src="https://1xy9lx7viu.ai-app.pub"
+    title="开平碉楼：五层悲歌"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="no-referrer"
+  ></iframe>
+  <script>
+    // 检测iframe是否加载成功，超时则保持fallback可见
+    const iframe = document.querySelector('iframe');
+    let loaded = false;
+    iframe.addEventListener('load', () => { loaded = true; });
+    setTimeout(() => {
+      if (!loaded) {
+        console.warn('iframe可能加载失败，请检查网络或X-Frame-Options限制');
+      }
+    }, 10000);
+  </script>
+</body>
+</html>
